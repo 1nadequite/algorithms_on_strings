@@ -1,1 +1,1 @@
-# algorithms_on_strings
+# Algorithms on Strings
