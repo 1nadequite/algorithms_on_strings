@@ -9,7 +9,7 @@
 using namespace std;
 const int maxn = 1005;
 const int alphabet = 256;
-vector<int> p(maxn), c(maxn), cnt(maxn), pn(maxn), cn(maxn), str(maxn);
+vector<int> p(maxn), c(maxn), cnt(maxn), pn(maxn), cn(maxn);
 
 void BWT(string s, int n) {
   for (int i = 0; i < n; ++i)
@@ -56,12 +56,10 @@ int main() {
 
   string s; cin >> s;
   int n = s.size();
-  for (int i = 0; i < n; ++i)
-    str[i] = n - i - 1;
 
   BWT(s, n);
   for (int i = 0; i < n; ++i)
-    cout << s[str[p[i]]];
+    cout << s[(p[i] + n - 1) % n];
   cout << endl;
 
   printf("%.8f\n", (clock() - start) / CLOCKS_PER_SEC);
