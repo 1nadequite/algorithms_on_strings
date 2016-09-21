@@ -84,11 +84,26 @@ vector<int> buildSuffixArray() {
   return order;
 }
 
-void search(char* s, char* pat, const vector<int>& suffix_array, int m) {
-  for (int i = 0; i < n; ++i) {
-    int res = strncmp(pat, s + suffix_array[i], m);
-    if (res == 0) occurrences.insert(suffix_array[i]);
+void patternMatching(char* s, char* pat, const vector<int>& suffix_array, int m) {
+  int l = 0, r = n, start, end;
+  while (l < r) {
+    int mid = (l + r) / 2;
+    int res = strncmp(pat, s + suffix_array[mid], m);
+    if (res > 0) l = mid + 1;
+    else r = mid;
   }
+  start = l;
+  r = n;
+  while (l < r) {
+    int mid = (l + r) / 2;
+    int res = strncmp(pat, s + suffix_array[mid], m);
+    if (res < 0) r = mid;
+    else l = mid + 1;
+  }
+  end = r;
+  if (start <= end)
+    for (int i = start; i < end; ++i)
+      occurrences.insert(suffix_array[i]);
 }
 
 int main() {
@@ -100,7 +115,7 @@ int main() {
 
   for (int i = 0; i < m; ++i) {
     cin >> pat;
-    search(&s[0], &pat[0], suffix_array, pat.size());
+    patternMatching(&s[0], &pat[0], suffix_array, pat.size());
   }
 
   for (auto x: occurrences)
