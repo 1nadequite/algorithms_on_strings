@@ -77,8 +77,10 @@ void STfromSA(node* root) {
 
 void printSuffixTree(node* root) {
   node* curNode = root;
-  if (curNode->parent != NULL)
-    cout << curNode->edgeStart << ' ' << curNode->edgeEnd << endl;
+  if (curNode->parent != NULL) {
+    string t = {s.begin() + curNode->edgeStart, s.begin() + curNode->edgeEnd};
+    cout << curNode->edgeStart << ' ' << curNode->edgeEnd << ' ' << t << endl;
+  }
   for (auto child: curNode->children)
     printSuffixTree(child.second);
 }
