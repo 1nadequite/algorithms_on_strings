@@ -1,4 +1,5 @@
 // Kasai's algorithm for construction of LCP array from Suffix Array
+// time: O(n)
 #include <iostream>
 #include <cstdio>
 #include <iomanip>
